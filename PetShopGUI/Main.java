@@ -32,36 +32,31 @@ public class Main {
         JButton botaoEntrar = new JButton("Entrar");
         JButton botaoCadastrar = new JButton("Cadastrar");
 
-        // Adicionando ações aos botões
+        // Adicionando ações ao botão "Entrar"
         botaoEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Botão 1 foi clicado!");
+                JOptionPane.showMessageDialog(frame, "Botão 'Entrar' foi clicado!");
             }
         });
 
+        // Adicionando ações ao botão "Cadastrar"
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Adicionando funcionalidade ao botão
-                botaoCadastrar.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // Fechar a tela atual
-                        frame.dispose();
-                        // Abrir a tela AnimalGUI
-                        CadastroGUI cadastroGUI = new CadastroGUI();
-                        cadastroGUI.mostrarTela();
-                    }
-                });
+                // Abrir a tela CadastroGUI
+                CadastroGUI cadastroGUI = new CadastroGUI();
+                cadastroGUI.mostrarTela();
             }
         });
 
-        botaoEntrar.setPreferredSize(new Dimension(100, 40)); // Largura 200px, Altura 50px
+        // Definindo o tamanho dos botões
+        botaoEntrar.setPreferredSize(new Dimension(100, 40)); // Largura 100px, Altura 40px
         botaoCadastrar.setPreferredSize(new Dimension(100, 40));
+
         // Adicionando os botões ao painel
         gbc.gridx = 0; // Posição na grade (coluna)
-        panelBotoes.add(Box.createVerticalStrut(70), gbc);
+        panelBotoes.add(Box.createVerticalStrut(70), gbc); // Espaçamento vertical
         gbc.gridy = 0; // Posição na grade (linha)
         panelBotoes.add(botaoEntrar, gbc);
 
@@ -70,7 +65,6 @@ public class Main {
 
         // Configurando o layout do frame
         frame.setLayout(new BorderLayout());
-
 
         // Adicionando componentes ao frame
         frame.add(logoLabel, BorderLayout.CENTER); // Logo no centro

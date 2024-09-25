@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 public class CadastroGUI {
 
     private JTextField textNome;
-    private JLabel labelNome;
     private JTextField textTelefone;
     private JTextField textEndereco;
 
@@ -14,71 +13,68 @@ public class CadastroGUI {
         // Criando o JFrame
         JFrame frame = new JFrame("Cadastro de Usuário");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Tamanho da Janela
         frame.setSize(500, 400);
 
         // Criando o painel principal com GridBagLayout
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        GridBagConstraints gbcCadastro = new GridBagConstraints();
-        gbcCadastro.fill = GridBagConstraints.HORIZONTAL;
-        gbcCadastro.insets = new Insets(10, 10, 10, 10); // Espaçamento interno (padding)
-        gbcCadastro.weightx = 1.0;
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 10, 10); // Espaçamento interno (padding)
+        gbc.weightx = 1.0;
 
         // Criando os rótulos e campos de texto
         JLabel labelNome = new JLabel("Nome:");
-        JTextField textNome = new JTextField(20);
+        textNome = new JTextField(20);
+        JLabel labelEndereco = new JLabel("Endereço:");
+        textEndereco = new JTextField(20);
+        JLabel labelTelefone = new JLabel("Telefone:");
+        textTelefone = new JTextField(20);
 
         // Adicionando os componentes ao painel
-        gbcCadastro.gridx = 0; gbcCadastro.gridy = 0; // Linha 0, Coluna 0
-        panel.add(labelNome, gbcCadastro);
-        gbcCadastro.gridx = 1; gbcCadastro.gridy = 0; // Linha 0, Coluna 1
-        panel.add(textNome, gbcCadastro);
+        gbc.gridx = 0; gbc.gridy = 0; // Linha 0, Coluna 0
+        panel.add(labelNome, gbc);
+        gbc.gridx = 1; gbc.gridy = 0; // Linha 0, Coluna 1
+        panel.add(textNome, gbc);
+        gbc.gridx = 0; gbc.gridy = 1; // Linha 1, Coluna 0
+        panel.add(labelEndereco, gbc);
+        gbc.gridx = 1; gbc.gridy = 1; // Linha 1, Coluna 1
+        panel.add(textEndereco, gbc);
+        gbc.gridx = 0; gbc.gridy = 2; // Linha 2, Coluna 0
+        panel.add(labelTelefone, gbc);
+        gbc.gridx = 1; gbc.gridy = 2; // Linha 2, Coluna 1
+        panel.add(textTelefone, gbc);
 
-        JLabel labelEndereco = new JLabel("Endereço:");
-        JTextField textEndereco = new JTextField(20);
+        // Criando um painel para os botões
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout()); // Usando FlowLayout para centralizar
 
-        gbcCadastro.gridx = 0; gbcCadastro.gridy = 1; // Linha 1, Coluna 0
-        panel.add(labelEndereco, gbcCadastro);
-        gbcCadastro.gridx = 1; gbcCadastro.gridy = 1; // Linha 1, Coluna 1
-        panel.add(textEndereco, gbcCadastro);
-
-        JLabel labelTelefone = new JLabel("Telefone:");
-        JTextField textTelefone = new JTextField(20);
-
-        gbcCadastro.gridx = 0; gbcCadastro.gridy = 2; // Linha 2, Coluna 0
-        panel.add(labelTelefone, gbcCadastro);
-        gbcCadastro.gridx = 1; gbcCadastro.gridy = 2; // Linha 2, Coluna 1
-        panel.add(textTelefone, gbcCadastro);
-
-        // Criando o botão de agendamento
+        // Criando os botões de cadastro
         JButton botaoCadastrarCliente = new JButton("Cadastrar Cliente");
-        // Adicionando o botão de agendamento
-        gbcCadastro.gridx = 0; gbcCadastro.gridy = 3; gbcCadastro.gridwidth = 1; // Linha 3, ocupando duas colunas
-        panel.add(botaoCadastrarCliente, gbcCadastro);
-
-        // Criando o botão "Cadastrar Animal"
         JButton botaoCadastrarAnimal = new JButton("Cadastrar Animal");
-        // Adicionando o botão ao painel
-        gbcCadastro.gridx = 0; gbcCadastro.gridy = 4; gbcCadastro.gridwidth = 1; // Linha 3, ocupando duas colunas
-        panel.add(botaoCadastrarAnimal, gbcCadastro);
 
-        // Adicionando funcionalidade ao botão
+        buttonPanel.add(botaoCadastrarCliente); // Adicionando o botão de cliente ao painel
+        buttonPanel.add(botaoCadastrarAnimal); // Adicionando o botão de animal ao painel
+
+        // Configurando o GridBagConstraints para o painel de botões
+        gbc.gridx = 0; // Posição na coluna
+        gbc.gridy = 3; // Posição na linha
+        gbc.gridwidth = 2; // Ocupando duas colunas
+        panel.add(buttonPanel, gbc); // Adiciona o painel de botões ao painel principal
+
+        // Adicionando funcionalidade ao botão de cadastro de cliente
         botaoCadastrarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nome = textNome.getText();
                 String endereco = textEndereco.getText();
                 String telefone = textTelefone.getText();
-
                 // Exibindo uma mensagem de confirmação
-                JOptionPane.showMessageDialog(frame, "Cadastro Realizado com Sucesso!\n" +
-                        "Nome: " + nome + "\nEndereço: " + endereco + "\nTelefone: " + telefone);
+                JOptionPane.showMessageDialog(frame, "Cadastro realizado com sucesso!");
             }
         });
 
-
-        // Adicionando funcionalidade ao botão
+        // Adicionando funcionalidade ao botão de cadastro de animal
         botaoCadastrarAnimal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
