@@ -23,20 +23,24 @@ public class CadastroGUI {
 
         JLabel labelNome = new JLabel("Nome:");
         textNome = new JTextField(20);
-        JLabel labelEndereco = new JLabel("Endereço:");
-        textEndereco = new JTextField(20);
-        JLabel labelTelefone = new JLabel("Telefone:");
-        textTelefone = new JTextField(20);
-
         gbc.gridx = 0; gbc.gridy = 0;
         panel.add(labelNome, gbc);
         gbc.gridx = 1; gbc.gridy = 0;
         panel.add(textNome, gbc);
+        
+        JLabel labelEndereco = new JLabel("Endereço:");
+        textEndereco = new JTextField(20);
         gbc.gridx = 0; gbc.gridy = 1; 
         panel.add(labelEndereco, gbc);
-        gbc.gridx = 1; gbc.gridy = 1; /
+        gbc.gridx = 1; gbc.gridy = 1; 
         panel.add(textEndereco, gbc);
+        
+        JLabel labelTelefone = new JLabel("Telefone:");
+        textTelefone = new JTextField(20);
         gbc.gridx = 0; gbc.gridy = 2; 
+        panel.add(labelTelefone, gbc);
+        gbc.gridx = 1; gbc.gridy = 2; 
+        panel.add(textTelefone, gbc); gbc.gridx = 0; gbc.gridy = 2; 
         panel.add(labelTelefone, gbc);
         gbc.gridx = 1; gbc.gridy = 2; 
         panel.add(textTelefone, gbc);
