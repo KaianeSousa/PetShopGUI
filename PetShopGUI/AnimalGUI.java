@@ -6,28 +6,24 @@ import java.awt.event.ActionListener;
 public class AnimalGUI {
 
     public void MostrarTelaAnimal() {
-        // Criando o JFrame
         JFrame frame = new JFrame("Cadastro de Animal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Tamanho da Janela
         frame.setSize(500, 400);
-
-        // Criando o painel principal com GridBagLayout
+        
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10); // Espaçamento interno (padding)
-        gbc.weightx = 1.0; // Aumenta a largura do espaço ocupado pela linha
+        gbc.insets = new Insets(10, 10, 10, 10); 
+        gbc.weightx = 1.0; 
 
-        // Criando os rótulos e campos de texto
         JLabel labelNomeAnimal = new JLabel("Nome do Animal:");
         JTextField textNomeAnimal = new JTextField(20);
 
-        // Adicionando os componentes ao painel
-        gbc.gridx = 0; gbc.gridy = 0; // Linha 0, Coluna 0
+        gbc.gridx = 0; gbc.gridy = 0; 
         panel.add(labelNomeAnimal, gbc);
-        gbc.gridx = 1; gbc.gridy = 0; // Linha 0, Coluna 1
+        gbc.gridx = 1; gbc.gridy = 0; 
         panel.add(textNomeAnimal, gbc);
 
         JLabel labelIdade = new JLabel("Idade:");
@@ -35,29 +31,26 @@ public class AnimalGUI {
         JLabel labelRaca = new JLabel("Raça:");
         JTextField textRaca = new JTextField(20);
 
-        gbc.gridx = 0; gbc.gridy = 1; // Linha 1, Coluna 0
+        gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelIdade, gbc);
-        gbc.gridx = 1; gbc.gridy = 1; // Linha 1, Coluna 1
+        gbc.gridx = 1; gbc.gridy = 1; 
         panel.add(textIdade, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 2; // Linha 2, Coluna 0
+        gbc.gridx = 0; gbc.gridy = 2; 
         panel.add(labelRaca, gbc);
-        gbc.gridx = 1; gbc.gridy = 2; // Linha 2, Coluna 1
+        gbc.gridx = 1; gbc.gridy = 2; 
         panel.add(textRaca, gbc);
 
-        // Criando um painel para o botão
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout()); // Usando FlowLayout para centralizar
+        buttonPanel.setLayout(new FlowLayout()); 
         JButton botaoCadastrar = new JButton("Cadastrar Animal");
-        buttonPanel.add(botaoCadastrar); // Adiciona o botão ao painel
+        buttonPanel.add(botaoCadastrar); 
 
-        // Configurando o GridBagConstraints para o botão
-        gbc.gridx = 0; // Posição na coluna
-        gbc.gridy = 3; // Posição na linha
-        gbc.gridwidth = 2; // Ocupando duas colunas
-        panel.add(buttonPanel, gbc); // Adiciona o painel do botão ao painel principal
+        gbc.gridx = 0; 
+        gbc.gridy = 3; 
+        gbc.gridwidth = 2;
+        panel.add(buttonPanel, gbc);
 
-        // Adicionando funcionalidade ao botão
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,13 +58,11 @@ public class AnimalGUI {
                 String idade = textIdade.getText();
                 String raca = textRaca.getText();
 
-                // Exibindo uma mensagem de confirmação
                 JOptionPane.showMessageDialog(frame, "Cadastro realizado com sucesso!");
-                frame.dispose(); // Fechar a tela após o cadastro
+                frame.dispose(); 
             }
         });
 
-        // Adicionando o painel ao frame
         frame.add(panel);
 
         // Tornando o frame visível
