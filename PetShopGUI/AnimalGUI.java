@@ -8,7 +8,6 @@ public class AnimalGUI {
     public void MostrarTelaAnimal() {
         JFrame frame = new JFrame("Cadastro de Animal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Tamanho da Janela
         frame.setSize(500, 400);
         
         JPanel panel = new JPanel();
