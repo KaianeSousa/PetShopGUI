@@ -77,7 +77,6 @@ public class CadastroGUI {
 
         frame.add(panel);
 
-        // Tornando o frame visível
         frame.setVisible(true);
     }
 }
