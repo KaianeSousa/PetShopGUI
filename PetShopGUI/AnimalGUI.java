@@ -26,19 +26,12 @@ public class AnimalGUI {
         panel.add(textNomeAnimal, gbc);
 
         JLabel labelIdade = new JLabel("Idade:");
-        JTextField textIdade = new JTextField(5);
-        JLabel labelRaca = new JLabel("Raça:");
-        JTextField textRaca = new JTextField(20);
+        JTextField textIdade = new JTextField(10);
 
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelIdade, gbc);
         gbc.gridx = 1; gbc.gridy = 1; 
         panel.add(textIdade, gbc);
-
-        gbc.gridx = 0; gbc.gridy = 2; 
-        panel.add(labelRaca, gbc);
-        gbc.gridx = 1; gbc.gridy = 2; 
-        panel.add(textRaca, gbc);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout()); 
@@ -55,8 +48,7 @@ public class AnimalGUI {
             public void actionPerformed(ActionEvent e) {
                 String nomeAnimal = textNomeAnimal.getText();
                 String idade = textIdade.getText();
-                String raca = textRaca.getText();
-
+                
                 JOptionPane.showMessageDialog(frame, "Cadastro realizado com sucesso!");
                 frame.dispose(); 
             }
