@@ -32,22 +32,26 @@ public class AnimalGUI {
         panel.add(labelIdade, gbc);
         gbc.gridx = 1; gbc.gridy = 1; 
         panel.add(textIdade, gbc);
+        
+        JLabel labelTipo = new JLabel("Tipo:");
+        JTextField textTipo = new JTextField(20);
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout()); 
-        JButton botaoCadastrar = new JButton("Cadastrar Animal");
-        buttonPanel.add(botaoCadastrar); 
+        gbc.gridx = 0; gbc.gridy = 2;
+        panel.add(labelTipo, gbc);
+        gbc.gridx = 1; gbc.gridy = 2;
+        panel.add(textTipo, gbc);
 
-        gbc.gridx = 0; 
-        gbc.gridy = 3; 
-        gbc.gridwidth = 2;
-        panel.add(buttonPanel, gbc);
+        JLabel labelRaca = new JLabel("Raça:");
+        JTextField textRaca = new JTextField(20);
+
+        gbc.gridx = 0; gbc.gridy = 3; 
+        panel.add(labelRaca, gbc);
+        gbc.gridx = 1; gbc.gridy = 3;
+        panel.add(textRaca, gbc);        
 
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomeAnimal = textNomeAnimal.getText();
-                String idade = textIdade.getText();
                 
                 JOptionPane.showMessageDialog(frame, "Cadastro realizado com sucesso!");
                 frame.dispose(); 
