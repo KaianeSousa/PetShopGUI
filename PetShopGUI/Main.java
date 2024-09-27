@@ -26,7 +26,7 @@ public class Main {
         JButton botaoCadastrar = new JButton("Cadastrar");
         JButton botaoAdministrar = new JButton("Área do Administrador");
 
-        Dimension tamanhoBotao = new Dimension(150, 30);
+        Dimension tamanhoBotao = new Dimension(200, 30);
         botaoEntrar.setPreferredSize(tamanhoBotao);
         botaoCadastrar.setPreferredSize(tamanhoBotao);
         botaoAdministrar.setPreferredSize(tamanhoBotao);
