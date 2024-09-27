@@ -5,31 +5,37 @@ import java.awt.event.ActionListener;
 
 public class Main {
     public static void main(String[] args) {
-
         JFrame frame = new JFrame("Pet Shop");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
 
-        ImageIcon logo = new ImageIcon("img/catsPNG.png");
-
+        ImageIcon logo = new ImageIcon("img/logo.png");
         JLabel logoLabel = new JLabel(logo);
-
         logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         logoLabel.setVerticalAlignment(SwingConstants.CENTER);
 
         JPanel panelBotoes = new JPanel();
-        panelBotoes.setLayout(new GridBagLayout()); 
+        panelBotoes.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL; 
-        gbc.weightx = 10.0;
-        
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 1.0;
+
         JButton botaoEntrar = new JButton("Entrar");
         JButton botaoCadastrar = new JButton("Cadastrar");
+        JButton botaoAdministrar = new JButton("Área do Administrador");
+
+        Dimension tamanhoBotao = new Dimension(150, 30);
+        botaoEntrar.setPreferredSize(tamanhoBotao);
+        botaoCadastrar.setPreferredSize(tamanhoBotao);
+        botaoAdministrar.setPreferredSize(tamanhoBotao);
 
         botaoEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Botão 'Entrar' foi clicado!");
+                LoginGUI loginGUI = new LoginGUI();
+                loginGUI.mostrarTelaLogin();
             }
         });
 
@@ -37,27 +43,31 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CadastroGUI cadastroGUI = new CadastroGUI();
-                cadastroGUI.mostrarTela();
+                cadastroGUI.mostrarTelaCadastro();
             }
         });
 
-        botaoEntrar.setPreferredSize(new Dimension(100, 40)); 
-        botaoCadastrar.setPreferredSize(new Dimension(100, 40));
+        botaoAdministrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdministradorGUI AdministradorGUI = new AdministradorGUI();
+                AdministradorGUI.mostrarTelaAdministrador();
+            }
+        });
 
         gbc.gridx = 0;
-        panelBotoes.add(Box.createVerticalStrut(70), gbc);
-        gbc.gridy = 0; 
+        gbc.gridy = 0;
         panelBotoes.add(botaoEntrar, gbc);
 
-        gbc.gridy = 1; 
+        gbc.gridy = 1;
         panelBotoes.add(botaoCadastrar, gbc);
 
+        gbc.gridy = 2;
+        panelBotoes.add(botaoAdministrar, gbc);
+
         frame.setLayout(new BorderLayout());
-
-        frame.add(logoLabel, BorderLayout.CENTER); 
-        frame.add(panelBotoes, BorderLayout.SOUTH); 
-
-        // Tornando o frame visível
+        frame.add(logoLabel, BorderLayout.CENTER);
+        frame.add(panelBotoes, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
 }
