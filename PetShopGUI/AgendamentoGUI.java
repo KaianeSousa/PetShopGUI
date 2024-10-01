@@ -8,7 +8,7 @@ public class AgendamentoGUI {
 
     public void mostrarTelaAgendamento(String servicoEscolhido) {
         JFrame frame = new JFrame("Agendamento de Serviços");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 400);
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -28,9 +28,11 @@ public class AgendamentoGUI {
         panel.add(labelData, gbc);
         gbc.gridx = 1; gbc.gridy = 1;
         panel.add(dateChooser, gbc);
-
+        
         JButton botaoAgendar = new JButton("Agendar");
-        gbc.gridx = 0; gbc.gridy = 3;
+        gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
         panel.add(botaoAgendar, gbc);
 
         botaoAgendar.addActionListener(new ActionListener() {
@@ -40,6 +42,8 @@ public class AgendamentoGUI {
                 String dataFormatada = (dataSelecionada != null) ? String.format("%1$td/%1$tm/%1$tY", dataSelecionada) : "Data não selecionada";
                 JOptionPane.showMessageDialog(frame, "Agendamento realizado com sucesso:\n" +
                         "Serviço: " + servicoEscolhido + "\nData: " + dataFormatada);
+
+                frame.dispose();
             }
         });
 

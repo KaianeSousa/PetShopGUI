@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class LoginGUI {
 
     public void mostrarTelaLogin() {
+
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
@@ -31,7 +32,10 @@ public class LoginGUI {
         panel.add(textSenha, gbc);
 
         JButton botaoLogin = new JButton("Entrar");
+        botaoLogin.setPreferredSize(new Dimension(100, 30));
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
         panel.add(botaoLogin, gbc);
 
         botaoLogin.addActionListener(new ActionListener() {

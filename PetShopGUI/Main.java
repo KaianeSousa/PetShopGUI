@@ -11,8 +11,8 @@ public class Main {
 
         ImageIcon logo = new ImageIcon("img/logo.png");
         JLabel logoLabel = new JLabel(logo);
-        logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        logoLabel.setVerticalAlignment(SwingConstants.CENTER);
+        logoLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        logoLabel.setVerticalAlignment(SwingConstants.HORIZONTAL);
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.setLayout(new GridBagLayout());
@@ -42,8 +42,8 @@ public class Main {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CadastroGUI cadastroGUI = new CadastroGUI();
-                cadastroGUI.mostrarTelaCadastro();
+                CadastroClienteGUI CadastroClienteGUI = new CadastroClienteGUI();
+                CadastroClienteGUI.mostrarTelaCadastro();
             }
         });
 
