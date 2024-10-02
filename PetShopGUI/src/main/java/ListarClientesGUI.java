@@ -1,65 +1,66 @@
+import entities.Cliente;
+import repository.ClienteRepository;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.*;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ListarClientesGUI {
 
-    // Conexão com o banco de dados
-    private Connection connection;
-
-    public ListarClientesGUI() {
-        try {
-            // Configurar a conexão com o banco de dados PostgreSQL
-            String url = "jdbc:mysql://localhost:3306/mysql"; // Altere conforme necessário
-            String user = "localhost"; // Altere conforme necessário
-            String password = ""; // Altere conforme necessário
-            connection = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados: " + e.getMessage());
-        }
-    }
-
     public void mostrarTelaListarClientes() {
-        JFrame frame = new JFrame("Lista de Clientes");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fecha apenas esta janela
-        frame.setSize(600, 400);
+        JFrame frame = new JFrame();
+        frame.setTitle("Listar Clientes");
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Criando a tabela para exibir os clientes
-        String[] columnNames = {"ID", "Nome", "Endereço", "Telefone"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        JTable table = new JTable(model);
+        try {
+            listarClientes(frame);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(frame, "Erro ao buscar clientes: " + e.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        }
 
-        // Carregar os clientes do banco de dados
-        carregarClientes(model);
-
-        // Adicionando a tabela a um JScrollPane para rolagem
-        JScrollPane scrollPane = new JScrollPane(table);
-        frame.add(scrollPane, BorderLayout.CENTER);
-
-        // Tornando o frame visível
         frame.setVisible(true);
     }
 
-    private void carregarClientes(DefaultTableModel model) {
-        String query = "SELECT id, nome, endereco, telefone FROM clientes"; // Ajuste conforme sua tabela e colunas
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+    public void listarClientes(JFrame frame) throws SQLException {
+        ClienteRepository cr = new ClienteRepository();
+        List<Cliente> clientes = cr.buscarClientes();
 
-            while (rs.next()) {
-                // Puxando dados do banco e adicionando à tabela
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String endereco = rs.getString("endereco");
-                String telefone = rs.getString("telefone");
-
-                // Adicionando a linha ao modelo da tabela
-                model.addRow(new Object[]{id, nome, endereco, telefone});
+        if (clientes != null && !clientes.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Cliente cliente : clientes) {
+                sb.append(mostraCliente(cliente)).append("\n\n");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao carregar clientes: " + e.getMessage());
+
+            JTextArea textArea = new JTextArea(sb.toString());
+            textArea.setFont(new Font("Monospaced", Font.PLAIN, 17));
+            textArea.setEditable(false);
+            textArea.setLineWrap(true);
+            textArea.setWrapStyleWord(true);
+
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(700, 500));
+
+            frame.add(scrollPane, BorderLayout.CENTER);
+        } else {
+            JOptionPane.showMessageDialog(frame, "Nenhum cliente cadastrado ainda.", "Clientes", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    public String mostraCliente(Cliente cliente) {
+        return "----------------------------------------------------------------------\n" +
+                "Identificador do cliente: " + cliente.getId() + "\n" +
+                "Nome do cliente: " + cliente.getNome() + "\n" +
+                "Telefone: " + cliente.getTelefone() + "\n" +
+                "E-mail: " + cliente.getEmail() + "\n" +
+                "Endereço: " + cliente.getEndereco();
+    }
+
+    public static void main(String[] args) {
+        ListarClientesGUI listarClientesGUI = new ListarClientesGUI();
+        listarClientesGUI.mostrarTelaListarClientes();
     }
 }
