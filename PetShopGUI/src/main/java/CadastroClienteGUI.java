@@ -1,7 +1,13 @@
+import entities.Cliente;
+import repository.ClienteRepository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CadastroClienteGUI {
 
@@ -13,7 +19,15 @@ public class CadastroClienteGUI {
     public JButton botaoVoltar;
     private JPanel painelButton;
 
-    public void mostrarTelaCadastro() {
+    private ClienteRepository clienteRepository;
+    private List<Cliente> clientes;
+
+    public CadastroClienteGUI() {
+        clienteRepository = new ClienteRepository();
+        clientes = new ArrayList<>();
+    }
+
+    public void mostrarTelaCadastroCliente() {
         JFrame frame = new JFrame("Cadastro de Usuário");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
@@ -28,33 +42,41 @@ public class CadastroClienteGUI {
         JLabel labelNome = new JLabel("Nome:");
         textNome = new JTextField(20);
 
-        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         panel.add(labelNome, gbc);
-        gbc.gridx = 1; gbc.gridy = 0;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         panel.add(textNome, gbc);
 
         JLabel labelEndereco = new JLabel("Endereço:");
         textEndereco = new JTextField(20);
 
-        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         panel.add(labelEndereco, gbc);
-        gbc.gridx = 1; gbc.gridy = 1;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
         panel.add(textEndereco, gbc);
 
         JLabel labelEmail = new JLabel("E-mail:");
         textEmail = new JTextField(20);
 
-        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         panel.add(labelEmail, gbc);
-        gbc.gridx = 1; gbc.gridy = 2;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         panel.add(textEmail, gbc);
 
         JLabel labelTelefone = new JLabel("Telefone:");
         textTelefone = new JTextField(20);
 
-        gbc.gridx = 0; gbc.gridy = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         panel.add(labelTelefone, gbc);
-        gbc.gridx = 1; gbc.gridy = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         panel.add(textTelefone, gbc);
 
         JButton botaoVoltar = new JButton("Voltar");
@@ -85,13 +107,32 @@ public class CadastroClienteGUI {
         botaoCadastrarAnimal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String nome = textNome.getText();
+                String endereco = textEndereco.getText();
+                String email = textEmail.getText();
+                String telefone = textTelefone.getText();
+
+                Cliente cliente = new Cliente(nome, telefone, email, endereco);
+
+                try {
+                    clienteRepository.adicionarCliente(cliente);
+                    JOptionPane.showMessageDialog(frame, "Cliente cadastrado com sucesso!");
+                    clientes.add(cliente);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(frame, "Erro ao cadastrar cliente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+
                 frame.dispose();
-                AnimalGUI animalGUI = new AnimalGUI();
-                animalGUI.MostrarTelaAnimal();
+                CadastroAnimalGUI cadastroAnimalGUI = new CadastroAnimalGUI();
+                cadastroAnimalGUI.mostrarTelaCadastroAnimal();
             }
         });
 
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    public List<Cliente> getClientesCadastrados() {
+        return clientes;
     }
 }

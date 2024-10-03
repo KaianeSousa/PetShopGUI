@@ -43,7 +43,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CadastroClienteGUI CadastroClienteGUI = new CadastroClienteGUI();
-                CadastroClienteGUI.mostrarTelaCadastro();
+                CadastroClienteGUI.mostrarTelaCadastroCliente();
             }
         });
 

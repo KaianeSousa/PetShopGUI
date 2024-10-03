@@ -2,19 +2,30 @@ package entities;
 
 public class Animal {
     private String nome;
-    private int raca;
+    private String raca;
+    private String tipo;
     private int idade;
     private Cliente dono;
 
-    public Animal(String nome, int idade, Cliente dono) {
+
+    public Animal(String nome, String raca,  String tipo, int idade, Cliente dono) {
         this.nome = nome;
         this.raca = raca;
+        this.tipo = tipo;
         this.idade = idade;
         this.dono = dono;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public int getIdade() {
@@ -24,4 +35,5 @@ public class Animal {
     public Cliente getDono() {
         return dono;
     }
+
 }
