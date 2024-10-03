@@ -1,4 +1,6 @@
-import repository.AnimalRepository;
+package src.main.java;
+
+import src.main.repository.AnimalRepository;
 import entities.Animal;
 
 import javax.swing.*;

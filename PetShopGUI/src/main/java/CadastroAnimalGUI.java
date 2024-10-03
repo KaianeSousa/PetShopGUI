@@ -1,4 +1,6 @@
-import repository.AnimalRepository;
+package src.main.java;
+
+import src.main.repository.AnimalRepository;
 import entities.Animal;
 import entities.Cliente;
 
@@ -29,6 +31,9 @@ public class CadastroAnimalGUI {
         JLabel labelNomeAnimal = new JLabel("Nome do Animal:");
         JTextField textNomeAnimal = new JTextField(20);
 
+        labelNomeAnimal.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
         gbc.gridx = 0; gbc.gridy = 0;
         panel.add(labelNomeAnimal, gbc);
         gbc.gridx = 1; gbc.gridy = 0;
@@ -36,6 +41,10 @@ public class CadastroAnimalGUI {
 
         JLabel labelIdade = new JLabel("Idade:");
         JTextField textIdade = new JTextField(5);
+
+        labelIdade.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
 
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelIdade, gbc);
@@ -45,6 +54,9 @@ public class CadastroAnimalGUI {
         JLabel labelTipo = new JLabel("Tipo:");
         JTextField textTipo = new JTextField(20);
 
+        labelTipo.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
         gbc.gridx = 0; gbc.gridy = 2;
         panel.add(labelTipo, gbc);
         gbc.gridx = 1; gbc.gridy = 2;
@@ -52,6 +64,9 @@ public class CadastroAnimalGUI {
 
         JLabel labelRaca = new JLabel("Raça:");
         JTextField textRaca = new JTextField(20);
+
+        labelRaca.setForeground(Color.decode("#025091"));  // Azul escuro
+
 
         gbc.gridx = 0; gbc.gridy = 3;
         panel.add(labelRaca, gbc);
@@ -99,6 +114,9 @@ public class CadastroAnimalGUI {
                 }
             }
         });
+
+        botaoCadastrar.setBackground(Color.decode("#025091"));
+        botaoCadastrar.setForeground(Color.WHITE);
 
         frame.add(panel);
         frame.setVisible(true);

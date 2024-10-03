@@ -1,4 +1,6 @@
-import repository.ClienteRepository;
+package src.main.java;
+
+import src.main.repository.ClienteRepository;
 import entities.Cliente;
 
 import javax.swing.*;

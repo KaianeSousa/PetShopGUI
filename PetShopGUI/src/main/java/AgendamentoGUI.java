@@ -1,3 +1,5 @@
+package src.main.java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,19 +19,25 @@ public class AgendamentoGUI {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.weightx = 1.0;
 
+        // Título do serviço
         JLabel labelServico = new JLabel("Serviço selecionado: " + servicoEscolhido);
+        labelServico.setFont(new Font("Arial", Font.BOLD, 16));  // Alterando tamanho e estilo da fonte
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         panel.add(labelServico, gbc);
 
+        // Título para a escolha da data
         JLabel labelData = new JLabel("Escolha a data:");
+        labelData.setFont(new Font("Arial", Font.PLAIN, 14));  // Alterando tamanho e estilo da fonte
         JDateChooser dateChooser = new JDateChooser();
         dateChooser.setDateFormatString("dd/MM/yyyy");
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 1;
         panel.add(labelData, gbc);
         gbc.gridx = 1; gbc.gridy = 1;
         panel.add(dateChooser, gbc);
-        
+
+        // Botão de agendamento
         JButton botaoAgendar = new JButton("Agendar");
+        botaoAgendar.setFont(new Font("Arial", Font.PLAIN, 14));  // Alterando tamanho e estilo da fonte
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
@@ -46,6 +54,10 @@ public class AgendamentoGUI {
                 frame.dispose();
             }
         });
+
+        // Definindo cores para o botão
+        botaoAgendar.setBackground(Color.decode("#025091"));
+        botaoAgendar.setForeground(Color.WHITE);
 
         frame.add(panel);
         frame.setVisible(true);

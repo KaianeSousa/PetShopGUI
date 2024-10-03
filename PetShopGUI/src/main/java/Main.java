@@ -1,3 +1,9 @@
+package src.main.java;
+
+import src.main.java.AdministradorGUI;
+import src.main.java.CadastroClienteGUI;
+import src.main.java.LoginGUI;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +28,7 @@ public class Main {
         titulo.setBorder(new EmptyBorder(20, 0, 20, 0));  // 20px de padding superior e inferior
 
         // Criação do logo
-        ImageIcon logo = new ImageIcon("src/main/img/logo.png");
+        ImageIcon logo = new ImageIcon("src.main/img/logo.png");
         JLabel logoLabel = new JLabel(logo);
         logoLabel.setHorizontalAlignment(SwingConstants.CENTER);  // Centralizar o logo
 

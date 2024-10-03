@@ -1,5 +1,7 @@
+package src.main.java;
+
 import entities.Cliente;
-import repository.ClienteRepository;
+import src.main.repository.ClienteRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,17 +54,17 @@ public class CadastroClienteGUI {
         labelNome.setForeground(Color.decode("#025091"));  // Azul escuro
 
 
-        JLabel labelEndereco = new JLabel("Endereço:");
-        textEndereco = new JTextField(20);
+        JLabel labelTelefone = new JLabel("Telefone:");
+        textTelefone = new JTextField(20);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(labelEndereco, gbc);
+        panel.add(labelTelefone, gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        panel.add(textEndereco, gbc);
+        panel.add(textTelefone, gbc);
 
-        labelEndereco.setForeground(Color.decode("#025091"));  // Azul escuro
+        labelTelefone.setForeground(Color.decode("#025091"));  // Azul escuro
 
         JLabel labelEmail = new JLabel("E-mail:");
         textEmail = new JTextField(20);
@@ -77,17 +79,18 @@ public class CadastroClienteGUI {
         labelEmail.setForeground(Color.decode("#025091"));  // Azul escuro
 
 
-        JLabel labelTelefone = new JLabel("Telefone:");
-        textTelefone = new JTextField(20);
+        JLabel labelEndereco = new JLabel("Endereço:");
+        textEndereco = new JTextField(20);
+
 
         gbc.gridx = 0;
         gbc.gridy = 3;
-        panel.add(labelTelefone, gbc);
+        panel.add(labelEndereco, gbc);
         gbc.gridx = 1;
         gbc.gridy = 3;
-        panel.add(textTelefone, gbc);
+        panel.add(textEndereco, gbc);
 
-        labelTelefone.setForeground(Color.decode("#025091"));  // Azul escuro
+        labelEndereco.setForeground(Color.decode("#025091"));  // Azul escuro
 
 
         botaoVoltar = new JButton("Voltar");
@@ -140,7 +143,7 @@ public class CadastroClienteGUI {
                 }
 
                 frame.dispose();
-                CadastroAnimalGUI cadastroAnimalGUI = new CadastroAnimalGUI();
+                var cadastroAnimalGUI = new CadastroAnimalGUI();
                 cadastroAnimalGUI.mostrarTelaCadastroAnimal();
             }
         });

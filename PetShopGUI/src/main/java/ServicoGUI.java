@@ -1,3 +1,5 @@
+package src.main.java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -78,11 +80,12 @@ public class ServicoGUI {
         botaoTosa.setBackground(Color.decode("#025091"));
         botaoTosa.setForeground(Color.WHITE);
 
-        botaoEntrar.setBackground(Color.decode("#025091"));
-        botaoEntrar.setForeground(Color.WHITE);
+        botaoVeterinario.setBackground(Color.decode("#025091"));
+        botaoVeterinario.setForeground(Color.WHITE);
 
-        botaoEntrar.setBackground(Color.decode("#025091"));
-        botaoEntrar.setForeground(Color.WHITE);
+        botaoPasseio.setBackground(Color.decode("#025091"));
+        botaoPasseio.setForeground(Color.WHITE);
+
 
         frame.add(panel);
         frame.setVisible(true);
