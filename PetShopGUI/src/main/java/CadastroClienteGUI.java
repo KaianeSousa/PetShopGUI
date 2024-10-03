@@ -49,6 +49,9 @@ public class CadastroClienteGUI {
         gbc.gridy = 0;
         panel.add(textNome, gbc);
 
+        labelNome.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
         JLabel labelEndereco = new JLabel("Endereço:");
         textEndereco = new JTextField(20);
 
@@ -58,6 +61,8 @@ public class CadastroClienteGUI {
         gbc.gridx = 1;
         gbc.gridy = 1;
         panel.add(textEndereco, gbc);
+
+        labelEndereco.setForeground(Color.decode("#025091"));  // Azul escuro
 
         JLabel labelEmail = new JLabel("E-mail:");
         textEmail = new JTextField(20);
@@ -69,6 +74,9 @@ public class CadastroClienteGUI {
         gbc.gridy = 2;
         panel.add(textEmail, gbc);
 
+        labelEmail.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
         JLabel labelTelefone = new JLabel("Telefone:");
         textTelefone = new JTextField(20);
 
@@ -79,7 +87,10 @@ public class CadastroClienteGUI {
         gbc.gridy = 3;
         panel.add(textTelefone, gbc);
 
-        JButton botaoVoltar = new JButton("Voltar");
+        labelTelefone.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
+        botaoVoltar = new JButton("Voltar");
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -88,7 +99,10 @@ public class CadastroClienteGUI {
         gbc.fill = GridBagConstraints.NONE;
         panel.add(botaoVoltar, gbc);
 
-        JButton botaoCadastrarAnimal = new JButton("Cadastrar Animal");
+        botaoVoltar.setBackground(Color.decode("#ABD0EF"));
+        botaoVoltar.setForeground(Color.decode("#025091"));
+
+        botaoCadastrarAnimal = new JButton("Cadastrar Animal");
 
         gbc.gridx = 1;
         gbc.gridy = 4;
@@ -96,6 +110,9 @@ public class CadastroClienteGUI {
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.fill = GridBagConstraints.NONE;
         panel.add(botaoCadastrarAnimal, gbc);
+
+        botaoCadastrarAnimal.setBackground(Color.decode("#025091"));
+        botaoCadastrarAnimal.setForeground(Color.WHITE);
 
         botaoVoltar.addActionListener(new ActionListener() {
             @Override

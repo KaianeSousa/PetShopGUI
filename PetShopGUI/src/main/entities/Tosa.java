@@ -15,5 +15,6 @@ public class Tosa extends Servico {
     public String detalhes() {
         return super.detalhes() + " com corte " + tipoCorte + ".";
     }
+}
 
 

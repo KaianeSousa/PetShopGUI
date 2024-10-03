@@ -24,12 +24,19 @@ public class LoginGUI {
         gbc.gridx = 1; gbc.gridy = 0;
         panel.add(textEmail, gbc);
 
+        labelEmail.setForeground(Color.decode("#025091"));  // Azul escuro
+
+
+
         JLabel labelSenha = new JLabel("Senha:");
         JPasswordField textSenha = new JPasswordField(20);
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelSenha, gbc);
         gbc.gridx = 1; gbc.gridy = 1;
         panel.add(textSenha, gbc);
+
+        labelSenha.setForeground(Color.decode("#025091"));  // Azul escuro
+
 
         JButton botaoLogin = new JButton("Entrar");
         botaoLogin.setPreferredSize(new Dimension(100, 30));
@@ -49,7 +56,13 @@ public class LoginGUI {
             }
         });
 
+        botaoLogin.setBackground(Color.decode("#025091"));
+        botaoLogin.setForeground(Color.WHITE);
+
         frame.add(panel);
         frame.setVisible(true);
+
+        frame.getContentPane().setBackground(Color.decode("#ABD0EF"));  // Define cor de fundo geral
+
     }
 }

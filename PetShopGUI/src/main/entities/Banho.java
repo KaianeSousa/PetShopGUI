@@ -12,5 +12,6 @@ public class Banho extends Servico {
 
     @Override
     public String detalhes() {
-        return super.detalhes() + " com duração " + duracao + ".";
+        return super.detalhes() + " com duração " + duracao + " minutos.";
     }
+}

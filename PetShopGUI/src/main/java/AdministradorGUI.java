@@ -50,6 +50,15 @@ public class AdministradorGUI {
             }
         });
 
+        botaoListarClientes.setBackground(Color.decode("#CD6C0A"));
+        botaoListarClientes.setForeground(Color.decode("#FFFFFF"));
+
+        botaoListarAnimais.setBackground(Color.decode("#CD6C0A"));
+        botaoListarAnimais.setForeground(Color.decode("#FFFFFF"));
+
+        botaoVoltar.setBackground(Color.decode("#ABD0EF"));
+        botaoVoltar.setForeground(Color.decode("#025091"));
+
         gbc.gridx = 0; gbc.gridy = 0;
         panelBotoes.add(botaoListarClientes, gbc);
 

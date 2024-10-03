@@ -72,6 +72,18 @@ public class ServicoGUI {
             }
         });
 
+        botaoBanho.setBackground(Color.decode("#025091"));
+        botaoBanho.setForeground(Color.WHITE);
+
+        botaoTosa.setBackground(Color.decode("#025091"));
+        botaoTosa.setForeground(Color.WHITE);
+
+        botaoEntrar.setBackground(Color.decode("#025091"));
+        botaoEntrar.setForeground(Color.WHITE);
+
+        botaoEntrar.setBackground(Color.decode("#025091"));
+        botaoEntrar.setForeground(Color.WHITE);
+
         frame.add(panel);
         frame.setVisible(true);
     }

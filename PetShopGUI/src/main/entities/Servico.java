@@ -3,16 +3,19 @@ public class Servico {
     private double preco;
 
     public Servico(String nomeServico, double preco) {
-        this.nome = nomeServico;
+        this.nomeServico = nomeServico;
         this.preco = preco;
     }
 
-    // Métodos para retornar informações do serviço
-    public String getnomeServico() { // De sangue, urina
+    public String getNomeServico() {
         return nomeServico;
     }
 
     public double getPreco() {
         return preco;
+    }
+
+    public String detalhes() {
+        return "Serviço: " + nomeServico + ", Preço: " + preco;
     }
 }
