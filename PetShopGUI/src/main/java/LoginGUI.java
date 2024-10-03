@@ -8,7 +8,7 @@ public class LoginGUI {
     public void mostrarTelaLogin() {
 
         JFrame frame = new JFrame("Login");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 300);
 
         JPanel panel = new JPanel(new GridBagLayout());

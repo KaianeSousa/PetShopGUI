@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConectarBancoDeDados {
     private static final String URL = "jdbc:mysql://localhost:3307/petshop";
     private static final String USER = "root";
-    private static final String PASSWORD = "123";
+    private static final String PASSWORD = "kaiane67";
 
     public static Connection getConnection() {
         try {

@@ -15,8 +15,8 @@ public class CadastroClienteGUI {
     private JTextField textTelefone;
     private JTextField textEmail;
     private JTextField textEndereco;
-    public JButton botaoCadastrarAnimal;
-    public JButton botaoVoltar;
+    private JButton botaoCadastrarAnimal;
+    private JLabel prosseguirCadastro;
     private JPanel painelButton;
 
     private ClienteRepository clienteRepository;
@@ -29,8 +29,8 @@ public class CadastroClienteGUI {
 
     public void mostrarTelaCadastroCliente() {
         JFrame frame = new JFrame("Cadastro de Usuário");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(800, 600);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -79,30 +79,22 @@ public class CadastroClienteGUI {
         gbc.gridy = 3;
         panel.add(textTelefone, gbc);
 
-        JButton botaoVoltar = new JButton("Voltar");
-
+        JLabel prosseguirCadastro = new JLabel("Clique no botão prosseguir com seu cadastro no sistema.");
         gbc.gridx = 0;
         gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.fill = GridBagConstraints.NONE;
-        panel.add(botaoVoltar, gbc);
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(prosseguirCadastro, gbc);
 
         JButton botaoCadastrarAnimal = new JButton("Cadastrar Animal");
-
         gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.fill = GridBagConstraints.NONE;
         panel.add(botaoCadastrarAnimal, gbc);
 
-        botaoVoltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-            }
-        });
+
 
         botaoCadastrarAnimal.addActionListener(new ActionListener() {
             @Override
@@ -111,6 +103,11 @@ public class CadastroClienteGUI {
                 String endereco = textEndereco.getText();
                 String email = textEmail.getText();
                 String telefone = textTelefone.getText();
+
+                if (nome.isEmpty() || endereco.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Para se cadastrar, preencha corretamente todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 Cliente cliente = new Cliente(nome, telefone, email, endereco);
 

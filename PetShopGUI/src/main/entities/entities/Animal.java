@@ -5,15 +5,13 @@ public class Animal {
     private String raca;
     private String tipo;
     private int idade;
-    private Cliente dono;
 
 
-    public Animal(String nome, String raca,  String tipo, int idade, Cliente dono) {
+    public Animal(String nome, String raca,  String tipo, int idade) {
         this.nome = nome;
         this.raca = raca;
         this.tipo = tipo;
         this.idade = idade;
-        this.dono = dono;
     }
 
     public String getNome() {
@@ -32,8 +30,16 @@ public class Animal {
         return idade;
     }
 
-    public Cliente getDono() {
-        return dono;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
+    public void setIdade(int i) {
+    }
+
+    public void setRaca(String text) {
+    }
+
+    public void setTipo(String text) {
+    }
 }

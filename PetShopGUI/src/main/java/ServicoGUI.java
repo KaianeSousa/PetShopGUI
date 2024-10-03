@@ -7,7 +7,7 @@ public class ServicoGUI {
 
     public void mostrarTelaServicos() {
         JFrame frame = new JFrame("Serviços");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 400);
 
         JPanel panel = new JPanel(new GridBagLayout());

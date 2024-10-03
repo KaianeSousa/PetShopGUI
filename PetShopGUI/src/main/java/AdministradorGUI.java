@@ -7,7 +7,7 @@ public class AdministradorGUI {
 
     public void mostrarTelaAdministrador() {
         JFrame frame = new JFrame("Pet Shop");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 400);
 
         JPanel panelBotoes = new JPanel();

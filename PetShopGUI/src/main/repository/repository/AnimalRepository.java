@@ -1,6 +1,7 @@
 package repository;
 
 import entities.Animal;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,11 +17,9 @@ public class AnimalRepository {
             stmt.setString(1, animal.getNome());
             stmt.setString(2, animal.getRaca());
             stmt.setInt(3, animal.getIdade());
-            stmt.setObject(4, animal.getDono());
             stmt.setString(5, animal.getTipo());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Erro ao adicionar animal: " + e.getMessage());
             throw new SQLException("Erro ao tentar adicionar animal no banco de dados.", e);
         }
     }
@@ -37,18 +36,34 @@ public class AnimalRepository {
                         rs.getString("NOME"),
                         rs.getString("RACA"),
                         rs.getString("TIPO"),
-                        rs.getInt("IDADE"),
-                        null
+                        rs.getInt("IDADE")
                 );
 
                 animais.add(animal);
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao buscar animais: " + e.getMessage());
             throw new SQLException("Erro ao tentar buscar animais no banco de dados.", e);
         }
 
         return animais;
+    }
+
+    public void atualizarAnimal(Animal animal) throws SQLException {
+        String sql = "UPDATE Animal SET NOME = ?, RACA = ?, IDADE = ?, TIPO = ? WHERE NOME = ? AND RACA = ? AND IDADE = ? AND TIPO = ?";
+
+        try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
+            stmt.setString(1, animal.getNome());
+            stmt.setString(2, animal.getRaca());
+            stmt.setInt(3, animal.getIdade());
+            stmt.setString(4, animal.getTipo());
+            stmt.setString(5, animal.getNome());
+            stmt.setString(6, animal.getRaca());
+            stmt.setInt(7, animal.getIdade());
+            stmt.setString(8, animal.getTipo());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao tentar atualizar animal no banco de dados.", e);
+        }
     }
 
     public void removerAnimal(Animal animal) throws SQLException {
@@ -61,7 +76,6 @@ public class AnimalRepository {
             stmt.setString(4, animal.getTipo());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Erro ao remover animal: " + e.getMessage());
             throw new SQLException("Erro ao tentar remover animal do banco de dados.", e);
         }
     }

@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Pet Shop");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(600, 400);
 
         ImageIcon logo = new ImageIcon("img/logo.png");
         JLabel logoLabel = new JLabel(logo);

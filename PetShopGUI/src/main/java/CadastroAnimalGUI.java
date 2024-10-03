@@ -16,7 +16,7 @@ public class CadastroAnimalGUI {
 
     public void mostrarTelaCadastroAnimal() {
         JFrame frame = new JFrame("Cadastro de Animal");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(500, 400);
 
         JPanel panel = new JPanel();
@@ -81,7 +81,7 @@ public class CadastroAnimalGUI {
                 try {
                     int idade = Integer.parseInt(idadeTexto);
 
-                    Animal animal = new Animal(nomeAnimal, raca, tipo, idade, dono);
+                    Animal animal = new Animal(nomeAnimal, raca, tipo, idade);
                     animaisCadastrados.add(animal);
 
                     animalRepository.adicionarAnimal(animal);
