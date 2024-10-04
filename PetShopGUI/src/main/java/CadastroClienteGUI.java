@@ -4,7 +4,6 @@ import repository.ClienteRepository;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +14,7 @@ public class CadastroClienteGUI {
     private JTextField textTelefone;
     private JTextField textEmail;
     private JTextField textEndereco;
-    private JButton botaoCadastrarAnimal;
-    private JLabel prosseguirCadastro;
-    private JPanel painelButton;
-
+    private JPasswordField textSenha;
     private ClienteRepository clienteRepository;
     private List<Cliente> clientes;
 
@@ -41,7 +37,6 @@ public class CadastroClienteGUI {
 
         JLabel labelNome = new JLabel("Nome:");
         textNome = new JTextField(20);
-
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(labelNome, gbc);
@@ -51,7 +46,6 @@ public class CadastroClienteGUI {
 
         JLabel labelEndereco = new JLabel("Endereço:");
         textEndereco = new JTextField(20);
-
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel.add(labelEndereco, gbc);
@@ -61,7 +55,6 @@ public class CadastroClienteGUI {
 
         JLabel labelEmail = new JLabel("E-mail:");
         textEmail = new JTextField(20);
-
         gbc.gridx = 0;
         gbc.gridy = 2;
         panel.add(labelEmail, gbc);
@@ -71,7 +64,6 @@ public class CadastroClienteGUI {
 
         JLabel labelTelefone = new JLabel("Telefone:");
         textTelefone = new JTextField(20);
-
         gbc.gridx = 0;
         gbc.gridy = 3;
         panel.add(labelTelefone, gbc);
@@ -79,50 +71,44 @@ public class CadastroClienteGUI {
         gbc.gridy = 3;
         panel.add(textTelefone, gbc);
 
-        JLabel prosseguirCadastro = new JLabel("Clique no botão prosseguir com seu cadastro no sistema.");
+        JLabel labelSenha = new JLabel("Senha:");
+        textSenha = new JPasswordField(20);
         gbc.gridx = 0;
         gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        panel.add(prosseguirCadastro, gbc);
+        panel.add(labelSenha, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        panel.add(textSenha, gbc);
 
-        JButton botaoCadastrarAnimal = new JButton("Cadastrar Animal");
+        JButton botaoCadastrar = new JButton("Cadastrar");
         gbc.gridx = 1;
         gbc.gridy = 5;
-        gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.NONE;
-        panel.add(botaoCadastrarAnimal, gbc);
+        panel.add(botaoCadastrar, gbc);
 
+        botaoCadastrar.addActionListener((ActionEvent e) -> {
+            String nome = textNome.getText();
+            String endereco = textEndereco.getText();
+            String email = textEmail.getText();
+            String telefone = textTelefone.getText();
+            String senha = new String(textSenha.getPassword());
 
-
-        botaoCadastrarAnimal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nome = textNome.getText();
-                String endereco = textEndereco.getText();
-                String email = textEmail.getText();
-                String telefone = textTelefone.getText();
-
-                if (nome.isEmpty() || endereco.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Para se cadastrar, preencha corretamente todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                Cliente cliente = new Cliente(nome, telefone, email, endereco);
-
-                try {
-                    clienteRepository.adicionarCliente(cliente);
-                    JOptionPane.showMessageDialog(frame, "Cliente cadastrado com sucesso!");
-                    clientes.add(cliente);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(frame, "Erro ao cadastrar cliente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-
-                frame.dispose();
-                CadastroAnimalGUI cadastroAnimalGUI = new CadastroAnimalGUI();
-                cadastroAnimalGUI.mostrarTelaCadastroAnimal();
+            if (nome.isEmpty() || endereco.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Preencha todos os campos corretamente para se cadastrar.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
             }
+
+            Cliente cliente = new Cliente(nome, telefone, email, endereco, senha);
+
+            try {
+                clienteRepository.adicionarCliente(cliente);
+                JOptionPane.showMessageDialog(frame, "Cliente cadastrado com sucesso!");
+                clientes.add(cliente);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(frame, "Erro ao cadastrar cliente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+            frame.dispose();
         });
 
         frame.add(panel);

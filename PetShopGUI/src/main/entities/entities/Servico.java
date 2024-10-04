@@ -1,20 +1,33 @@
 package entities;
 
 public class Servico {
-    private String nomeServico;
-    private double preco;
 
-    public Servico(String nomeServico, double preco) {
-        this.nomeServico = nomeServico;
-        this.preco = preco;
+    public enum ClassificacaoServico {
+        BANHO,
+        TOSA,
+        CONSULTA_VETERINÁRIA,
+        PASSEIO
     }
 
-    // Métodos para retornar informações do serviço
-    public String getnomeServico() { // De sangue, urina
-        return nomeServico;
+    private int id;
+    private String nome;
+    private ClassificacaoServico classificacao;
+
+    public Servico(int id, String nome, ClassificacaoServico classificacao) {
+        this.id = id;
+        this.nome = nome;
+        this.classificacao = classificacao;
     }
 
-    public double getPreco() {
-        return preco;
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public ClassificacaoServico getClassificacao() {
+        return classificacao;
     }
 }

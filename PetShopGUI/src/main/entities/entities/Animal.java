@@ -4,10 +4,10 @@ public class Animal {
     private String nome;
     private String raca;
     private String tipo;
-    private int idade;
+    private String idade;
 
 
-    public Animal(String nome, String raca,  String tipo, int idade) {
+    public Animal(String nome, String raca,  String tipo, String idade) {
         this.nome = nome;
         this.raca = raca;
         this.tipo = tipo;
@@ -26,7 +26,7 @@ public class Animal {
         return tipo;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 

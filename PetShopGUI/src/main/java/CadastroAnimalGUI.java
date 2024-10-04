@@ -1,6 +1,5 @@
 import repository.AnimalRepository;
 import entities.Animal;
-import entities.Cliente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +34,7 @@ public class CadastroAnimalGUI {
         panel.add(textNomeAnimal, gbc);
 
         JLabel labelIdade = new JLabel("Idade:");
-        JTextField textIdade = new JTextField(5);
+        JTextField textIdade = new JTextField(20);
 
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelIdade, gbc);
@@ -72,30 +71,26 @@ public class CadastroAnimalGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nomeAnimal = textNomeAnimal.getText();
-                String idadeTexto = textIdade.getText();
+                String idade = textIdade.getText();
                 String tipo = textTipo.getText();
                 String raca = textRaca.getText();
 
-                Cliente dono = null;
+                if (nomeAnimal.isEmpty() || idade.isEmpty() || tipo.isEmpty() || raca.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Para se cadastrar, preencha corretamente todos os campos.",
+                                            "ERRO", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 try {
-                    int idade = Integer.parseInt(idadeTexto);
-
                     Animal animal = new Animal(nomeAnimal, raca, tipo, idade);
                     animaisCadastrados.add(animal);
 
                     animalRepository.adicionarAnimal(animal);
                     JOptionPane.showMessageDialog(frame, "Cadastro realizado com sucesso!");
                     frame.dispose();
-                } catch (NumberFormatException ex) {
-                    textIdade.setBackground(Color.RED);
-                    JOptionPane.showMessageDialog(frame, "Por favor, insira uma idade válida (número inteiro).",
-                            "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
-                    textIdade.setText("");
-                    textIdade.requestFocus();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(frame, "Erro ao cadastrar animal: " + ex.getMessage(),
-                            "Erro", JOptionPane.ERROR_MESSAGE);
+                                            "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

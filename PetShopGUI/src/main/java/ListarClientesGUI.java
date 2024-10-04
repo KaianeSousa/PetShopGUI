@@ -115,6 +115,7 @@ public class ListarClientesGUI {
         JTextField campoTelefone = new JTextField(cliente.getTelefone());
         JTextField campoEmail = new JTextField(cliente.getEmail());
         JTextField campoEndereco = new JTextField(cliente.getEndereco());
+        JTextField campoSenha = new JTextField(cliente.getSenha());
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(new JLabel("Nome:"));
@@ -125,6 +126,8 @@ public class ListarClientesGUI {
         panel.add(campoEmail);
         panel.add(new JLabel("Endereço:"));
         panel.add(campoEndereco);
+        panel.add(new JLabel("Senha:"));
+        panel.add(campoSenha);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Editar Cliente",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -134,6 +137,7 @@ public class ListarClientesGUI {
             cliente.setTelefone(campoTelefone.getText());
             cliente.setEmail(campoEmail.getText());
             cliente.setEndereco(campoEndereco.getText());
+            cliente.setSenha(campoSenha.getText());
 
             try {
                 clienteRepository.atualizarCliente(cliente);

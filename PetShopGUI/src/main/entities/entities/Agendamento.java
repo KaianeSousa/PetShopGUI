@@ -1,20 +1,22 @@
 package entities;
 
-import java.time.LocalDate;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Agendamento {
-    private LocalDate data;
+    private Date data;
+    private Time horario;
 
-    public Agendamento(LocalDate data) {
+    public Agendamento(Date data, Time horario) {
         this.data = data;
+        this.horario = horario;
     }
 
-    public LocalDate getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public Time getHorario() {
+        return horario;
     }
 }
-

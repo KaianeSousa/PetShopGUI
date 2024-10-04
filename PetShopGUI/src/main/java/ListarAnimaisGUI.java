@@ -57,13 +57,13 @@ public class ListarAnimaisGUI {
             botaoExcluir.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int selectedIndex = animalComboBox.getSelectedIndex();
-                    if (selectedIndex != -1) {
-                        Animal animalSelecionado = animais.get(selectedIndex);
+                    int selecionarIndice = animalComboBox.getSelectedIndex();
+                    if (selecionarIndice != -1) {
+                        Animal animalSelecionado = animais.get(selecionarIndice);
                         try {
                             animalRepository.removerAnimal(animalSelecionado);
-                            animais.remove(selectedIndex);
-                            animalComboBox.removeItemAt(selectedIndex);
+                            animais.remove(selecionarIndice);
+                            animalComboBox.removeItemAt(selecionarIndice);
                             JOptionPane.showMessageDialog(frame, "Animal removido com sucesso.");
                             atualizarTextArea(textArea);
                         } catch (SQLException ex) {
@@ -79,10 +79,10 @@ public class ListarAnimaisGUI {
             botaoEditar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int selectedIndex = animalComboBox.getSelectedIndex();
-                    if (selectedIndex != -1) {
-                        Animal animalSelecionado = animais.get(selectedIndex);
-                        editarAnimal(animalSelecionado, animalComboBox, selectedIndex, textArea);
+                    int selecionarIndice = animalComboBox.getSelectedIndex();
+                    if (selecionarIndice != -1) {
+                        Animal animalSelecionado = animais.get(selecionarIndice);
+                        editarAnimal(animalSelecionado, animalComboBox, selecionarIndice, textArea);
                     } else {
                         JOptionPane.showMessageDialog(frame, "Nenhum animal cadastrado.");
                     }
@@ -101,8 +101,8 @@ public class ListarAnimaisGUI {
         }
     }
 
-    public String mostraAnimal(Animal animal, int index) {
-        return  "Animal " + (index + 1) + ": \n" +
+    public String mostraAnimal(Animal animal, int indice) {
+        return  "Animal " + (indice + 1) + ": \n" +
                 "Nome: " + animal.getNome() + "\n" +
                 "Raça: " + animal.getRaca() + "\n" +
                 "Tipo: " + animal.getTipo() + "\n" +
@@ -110,7 +110,7 @@ public class ListarAnimaisGUI {
                 "_____________________________________________";
     }
 
-    private void editarAnimal(Animal animal, JComboBox<String> comboBox, int selectedIndex, JTextArea textArea) {
+    private void editarAnimal(Animal animal, JComboBox<String> comboBox, int selecionarIndice, JTextArea textArea) {
         JTextField campoNome = new JTextField(animal.getNome());
         JTextField campoRaca = new JTextField(animal.getRaca());
         JTextField campoTipo = new JTextField(animal.getTipo());
@@ -142,9 +142,9 @@ public class ListarAnimaisGUI {
 
             try {
                 animalRepository.atualizarAnimal(animal);
-                animais.set(selectedIndex, animal);
-                comboBox.removeItemAt(selectedIndex);
-                comboBox.insertItemAt("Animal " + (selectedIndex + 1) + ": " + animal.getNome(), selectedIndex);
+                animais.set(selecionarIndice, animal);
+                comboBox.removeItemAt(selecionarIndice);
+                comboBox.insertItemAt("Animal " + (selecionarIndice + 1) + ": " + animal.getNome(), selecionarIndice);
                 JOptionPane.showMessageDialog(null, "Animal atualizado com sucesso.");
                 atualizarTextArea(textArea);
             } catch (SQLException e) {
