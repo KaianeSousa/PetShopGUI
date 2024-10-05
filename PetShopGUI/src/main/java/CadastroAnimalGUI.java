@@ -16,7 +16,7 @@ public class CadastroAnimalGUI {
     public void mostrarTelaCadastroAnimal() {
         JFrame frame = new JFrame("Cadastro de Animal");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(700, 500);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -25,8 +25,13 @@ public class CadastroAnimalGUI {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.weightx = 1.0;
 
+        JLabel labelId = new JLabel("Raça:");
+        JTextField textId= new JTextField(20);
+        labelId.setForeground(Color.decode("#025091"));
+
         JLabel labelNomeAnimal = new JLabel("Nome do Animal:");
         JTextField textNomeAnimal = new JTextField(20);
+        labelNomeAnimal.setForeground(Color.decode("#025091"));
 
         gbc.gridx = 0; gbc.gridy = 0;
         panel.add(labelNomeAnimal, gbc);
@@ -35,6 +40,7 @@ public class CadastroAnimalGUI {
 
         JLabel labelIdade = new JLabel("Idade:");
         JTextField textIdade = new JTextField(20);
+        labelIdade.setForeground(Color.decode("#025091"));
 
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelIdade, gbc);
@@ -43,6 +49,7 @@ public class CadastroAnimalGUI {
 
         JLabel labelTipo = new JLabel("Tipo:");
         JTextField textTipo = new JTextField(20);
+        labelTipo.setForeground(Color.decode("#025091"));
 
         gbc.gridx = 0; gbc.gridy = 2;
         panel.add(labelTipo, gbc);
@@ -51,6 +58,7 @@ public class CadastroAnimalGUI {
 
         JLabel labelRaca = new JLabel("Raça:");
         JTextField textRaca = new JTextField(20);
+        labelRaca.setForeground(Color.decode("#025091"));
 
         gbc.gridx = 0; gbc.gridy = 3;
         panel.add(labelRaca, gbc);
@@ -70,6 +78,8 @@ public class CadastroAnimalGUI {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                int id = Integer.parseInt(textId.getText());;
                 String nomeAnimal = textNomeAnimal.getText();
                 String idade = textIdade.getText();
                 String tipo = textTipo.getText();
@@ -82,7 +92,8 @@ public class CadastroAnimalGUI {
                 }
 
                 try {
-                    Animal animal = new Animal(nomeAnimal, raca, tipo, idade);
+
+                    Animal animal = new Animal(id, nomeAnimal, raca, tipo, idade);
                     animaisCadastrados.add(animal);
 
                     animalRepository.adicionarAnimal(animal);
@@ -95,7 +106,11 @@ public class CadastroAnimalGUI {
             }
         });
 
+        botaoCadastrar.setBackground(Color.decode("#025091"));
+        botaoCadastrar.setForeground(Color.WHITE);
+
         frame.add(panel);
         frame.setVisible(true);
+        frame.getContentPane().setBackground(Color.decode("#F0F8FF"));
     }
 }

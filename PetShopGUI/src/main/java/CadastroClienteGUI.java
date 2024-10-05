@@ -26,7 +26,7 @@ public class CadastroClienteGUI {
     public void mostrarTelaCadastroCliente() {
         JFrame frame = new JFrame("Cadastro de Usuário");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(700, 500);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -37,53 +37,50 @@ public class CadastroClienteGUI {
 
         JLabel labelNome = new JLabel("Nome:");
         textNome = new JTextField(20);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        labelNome.setForeground(Color.decode("#025091"));
+        gbc.gridx = 0; gbc.gridy = 0;
         panel.add(labelNome, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc.gridx = 1; gbc.gridy = 0;
         panel.add(textNome, gbc);
 
         JLabel labelEndereco = new JLabel("Endereço:");
         textEndereco = new JTextField(20);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        labelEndereco.setForeground(Color.decode("#025091"));
+        gbc.gridx = 0; gbc.gridy = 1;
         panel.add(labelEndereco, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx = 1; gbc.gridy = 1;
         panel.add(textEndereco, gbc);
 
         JLabel labelEmail = new JLabel("E-mail:");
         textEmail = new JTextField(20);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        labelEmail.setForeground(Color.decode("#025091"));
+        gbc.gridx = 0; gbc.gridy = 2;
         panel.add(labelEmail, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridx = 1; gbc.gridy = 2;
         panel.add(textEmail, gbc);
 
         JLabel labelTelefone = new JLabel("Telefone:");
         textTelefone = new JTextField(20);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
+        labelTelefone.setForeground(Color.decode("#025091"));
+        gbc.gridx = 0; gbc.gridy = 3;
         panel.add(labelTelefone, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridx = 1; gbc.gridy = 3;
         panel.add(textTelefone, gbc);
 
         JLabel labelSenha = new JLabel("Senha:");
         textSenha = new JPasswordField(20);
-        gbc.gridx = 0;
-        gbc.gridy = 4;
+        labelSenha.setForeground(Color.decode("#025091"));
+        gbc.gridx = 0; gbc.gridy = 4;
         panel.add(labelSenha, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridx = 1; gbc.gridy = 4;
         panel.add(textSenha, gbc);
 
         JButton botaoCadastrar = new JButton("Cadastrar");
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        gbc.anchor = GridBagConstraints.LINE_START;
+        botaoCadastrar.setPreferredSize(new Dimension(100, 30));
+        gbc.gridx = 0;  gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
         panel.add(botaoCadastrar, gbc);
 
         botaoCadastrar.addActionListener((ActionEvent e) -> {
@@ -94,7 +91,8 @@ public class CadastroClienteGUI {
             String senha = new String(textSenha.getPassword());
 
             if (nome.isEmpty() || endereco.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Preencha todos os campos corretamente para se cadastrar.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Preencha todos os campos corretamente para se cadastrar.",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -102,17 +100,24 @@ public class CadastroClienteGUI {
 
             try {
                 clienteRepository.adicionarCliente(cliente);
-                JOptionPane.showMessageDialog(frame, "Cliente cadastrado com sucesso!");
-                clientes.add(cliente);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(frame, "Erro ao cadastrar cliente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                throw new RuntimeException(ex);
             }
+            JOptionPane.showMessageDialog(frame, "Cliente cadastrado com sucesso!");
+            clientes.add(cliente);
+
+                CadastroAnimalGUI cadastroAnimalGUI = new CadastroAnimalGUI();
+                cadastroAnimalGUI.mostrarTelaCadastroAnimal();
 
             frame.dispose();
         });
 
+        botaoCadastrar.setBackground(Color.decode("#CD6C0A"));
+        botaoCadastrar.setForeground(Color.WHITE);
+
         frame.add(panel);
         frame.setVisible(true);
+        frame.getContentPane().setBackground(Color.decode("#F0F8FF"));
     }
 
     public List<Cliente> getClientesCadastrados() {

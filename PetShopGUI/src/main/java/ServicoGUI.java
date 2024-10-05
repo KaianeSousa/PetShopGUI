@@ -8,7 +8,7 @@ public class ServicoGUI {
     public void mostrarTelaServicos() {
         JFrame frame = new JFrame("Serviços");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(700, 500);
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -71,6 +71,18 @@ public class ServicoGUI {
                 agendamentoGUI.mostrarTelaAgendamento("Passeio com Animais");
             }
         });
+
+        botaoBanho.setBackground(Color.decode("#025091"));
+        botaoBanho.setForeground(Color.WHITE);
+
+        botaoTosa.setBackground(Color.decode("#025091"));
+        botaoTosa.setForeground(Color.WHITE);
+
+        botaoVeterinario.setBackground(Color.decode("#025091"));
+        botaoVeterinario.setForeground(Color.WHITE);
+
+        botaoPasseio.setBackground(Color.decode("#025091"));
+        botaoPasseio.setForeground(Color.WHITE);
 
         frame.add(panel);
         frame.setVisible(true);

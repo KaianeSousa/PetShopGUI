@@ -9,19 +9,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ListarAnimaisGUI {
-
     private AnimalRepository animalRepository = new AnimalRepository();
     private List<Animal> animais;
+    private JFrame frame;
 
     public void mostrarTelaListarAnimais() {
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setTitle("Listar Animais");
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         try {
-            listarAnimais(frame);
+            listarAnimais();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(frame, "Erro ao buscar animais: " + e.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
@@ -30,8 +30,11 @@ public class ListarAnimaisGUI {
         frame.setVisible(true);
     }
 
-    public void listarAnimais(JFrame frame) throws SQLException {
+    public void listarAnimais() throws SQLException {
         animais = animalRepository.buscarAnimais();
+
+        frame.getContentPane().removeAll();
+        frame.repaint();
 
         if (animais != null && !animais.isEmpty()) {
             JPanel panelBotoes = new JPanel();
@@ -49,7 +52,7 @@ public class ListarAnimaisGUI {
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);
 
-            atualizarTextArea(textArea);
+            atualizarListaAnimais(textArea);
 
             JScrollPane scrollPane = new JScrollPane(textArea);
             scrollPane.setPreferredSize(new Dimension(700, 400));
@@ -65,7 +68,7 @@ public class ListarAnimaisGUI {
                             animais.remove(selecionarIndice);
                             animalComboBox.removeItemAt(selecionarIndice);
                             JOptionPane.showMessageDialog(frame, "Animal removido com sucesso.");
-                            atualizarTextArea(textArea);
+                            atualizarListaAnimais(textArea);
                         } catch (SQLException ex) {
                             JOptionPane.showMessageDialog(frame, "Erro ao remover animal: " + ex.getMessage(),
                                     "Erro", JOptionPane.ERROR_MESSAGE);
@@ -93,6 +96,8 @@ public class ListarAnimaisGUI {
             panelBotoes.add(botaoExcluir);
             panelBotoes.add(botaoEditar);
 
+            frame.getContentPane().setBackground(Color.decode("#F0F8FF"));
+
             frame.setLayout(new BorderLayout());
             frame.add(panelBotoes, BorderLayout.NORTH);
             frame.add(scrollPane, BorderLayout.CENTER);
@@ -107,7 +112,7 @@ public class ListarAnimaisGUI {
                 "Raça: " + animal.getRaca() + "\n" +
                 "Tipo: " + animal.getTipo() + "\n" +
                 "Idade: " + animal.getIdade() + " anos" + "\n" +
-                "_____________________________________________";
+                "_______________________________________________________________________________________\n";
     }
 
     private void editarAnimal(Animal animal, JComboBox<String> comboBox, int selecionarIndice, JTextArea textArea) {
@@ -119,10 +124,10 @@ public class ListarAnimaisGUI {
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(new JLabel("Nome:"));
         panel.add(campoNome);
-        panel.add(new JLabel("Raça:"));
-        panel.add(campoRaca);
         panel.add(new JLabel("Tipo:"));
         panel.add(campoTipo);
+        panel.add(new JLabel("Raça:"));
+        panel.add(campoRaca);
         panel.add(new JLabel("Idade:"));
         panel.add(campoIdade);
 
@@ -133,7 +138,12 @@ public class ListarAnimaisGUI {
             String novoNome = campoNome.getText();
             String novaRaca = campoRaca.getText();
             String novoTipo = campoTipo.getText();
-            int novaIdade = Integer.parseInt(campoIdade.getText());
+            String novaIdade = campoIdade.getText();
+
+            if (novoNome.isEmpty() || novaRaca.isEmpty() || novoTipo.isEmpty() || novaIdade.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             animal.setNome(novoNome);
             animal.setRaca(novaRaca);
@@ -142,11 +152,9 @@ public class ListarAnimaisGUI {
 
             try {
                 animalRepository.atualizarAnimal(animal);
-                animais.set(selecionarIndice, animal);
-                comboBox.removeItemAt(selecionarIndice);
-                comboBox.insertItemAt("Animal " + (selecionarIndice + 1) + ": " + animal.getNome(), selecionarIndice);
+                atualizarLista(comboBox, animal, selecionarIndice);
                 JOptionPane.showMessageDialog(null, "Animal atualizado com sucesso.");
-                atualizarTextArea(textArea);
+                atualizarListaAnimais(textArea);
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Erro ao atualizar animal: " + e.getMessage(),
                         "Erro", JOptionPane.ERROR_MESSAGE);
@@ -154,11 +162,15 @@ public class ListarAnimaisGUI {
         }
     }
 
-    private void atualizarTextArea(JTextArea textArea) {
-        StringBuilder sb = new StringBuilder();
+    private void atualizarLista(JComboBox<String> lista, Animal animal, int index) {
+        lista.removeItemAt(index);
+        lista.insertItemAt("Animal " + (index + 1) + ": " + animal.getNome(), index);
+    }
+
+    private void atualizarListaAnimais(JTextArea atualizarListaAnimais) {
+        atualizarListaAnimais.setText("");
         for (int i = 0; i < animais.size(); i++) {
-            sb.append(mostraAnimal(animais.get(i), i)).append("\n\n");
+            atualizarListaAnimais.append(mostraAnimal(animais.get(i), i));
         }
-        textArea.setText(sb.toString());
     }
 }

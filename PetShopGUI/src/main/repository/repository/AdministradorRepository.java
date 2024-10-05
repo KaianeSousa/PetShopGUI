@@ -18,7 +18,7 @@ public class AdministradorRepository {
             statement.setString(1, email);
             statement.setString(2, senha);
             ResultSet resultSet = statement.executeQuery();
-            return resultSet.next(); // Retorna true se houver um registro correspondente
+            return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

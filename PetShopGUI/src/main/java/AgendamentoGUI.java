@@ -7,17 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.toedter.calendar.JDateChooser;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AgendamentoGUI {
-    private List<Agendamento> agendamentos = new ArrayList<>(); // Lista para armazenar os agendamentos
+    private List<Agendamento> agendamentos = new ArrayList<>();
 
     public void mostrarTelaAgendamento(String servicoEscolhido) {
         JFrame frame = new JFrame("Agendamento de Serviços");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(700, 500);
 
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -26,10 +27,12 @@ public class AgendamentoGUI {
         gbc.weightx = 1.0;
 
         JLabel labelServico = new JLabel("Serviço selecionado: " + servicoEscolhido);
+        labelServico.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
         panel.add(labelServico, gbc);
 
         JLabel labelData = new JLabel("Escolha a data:");
+        labelData.setFont(new Font("Arial", Font.PLAIN, 14));
         JDateChooser dateChooser = new JDateChooser();
         dateChooser.setDateFormatString("dd/MM/yyyy");
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 1;
@@ -47,6 +50,7 @@ public class AgendamentoGUI {
         panel.add(comboBoxHorarios, gbc);
 
         JButton botaoAgendar = new JButton("Agendar");
+        botaoAgendar.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
@@ -58,17 +62,22 @@ public class AgendamentoGUI {
                 java.util.Date dataSelecionada = dateChooser.getDate();
 
                 if (dataSelecionada != null) {
-                    Date dataSql = new Date(dataSelecionada.getTime()); // Converte java.util.Date para java.sql.Date
+                    Date dataSql = new Date(dataSelecionada.getTime());
 
-                    // Captura o horário selecionado
+
                     String horarioSelecionado = (String) comboBoxHorarios.getSelectedItem();
-                    Time horarioSql = Time.valueOf(horarioSelecionado + ":00"); // Converte String para java.sql.Time
+                    Time horarioSql = Time.valueOf(horarioSelecionado + ":00");
 
-                    // Cria um novo agendamento
                     Agendamento novoAgendamento = new Agendamento(dataSql, horarioSql);
-                    AgendamentoRepository.salvarAgendamento(novoAgendamento); // Salva o agendamento no banco
+                    try {
+                        AgendamentoRepository.salvarAgendamento(novoAgendamento);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
-                    agendamentos.add(novoAgendamento); // Adiciona o agendamento à lista
+                    agendamentos.add(novoAgendamento);
 
                     // Exibe a mensagem
                     JOptionPane.showMessageDialog(frame, "Agendamento realizado com sucesso:\n" +
@@ -81,7 +90,12 @@ public class AgendamentoGUI {
             }
         });
 
+
+        botaoAgendar.setBackground(Color.decode("#025091"));
+        botaoAgendar.setForeground(Color.WHITE);
+
         frame.add(panel);
         frame.setVisible(true);
+        frame.getContentPane().setBackground(Color.decode("#F0F8FF"));
     }
 }
