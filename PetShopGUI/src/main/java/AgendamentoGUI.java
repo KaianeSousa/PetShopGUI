@@ -4,7 +4,6 @@ import repository.AgendamentoRepository;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import com.toedter.calendar.JDateChooser;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -41,8 +40,7 @@ public class AgendamentoGUI {
         panel.add(dateChooser, gbc);
 
         JLabel labelHorario = new JLabel("Escolha o horário:");
-        String[] horarios = {"08:00", "09:00", "10:00", "11:00", "12:00",
-                "14:00", "15:00", "16:00", "17:00", "18:00"};
+        String[] horarios = {"08:00", "09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
         JComboBox<String> comboBoxHorarios = new JComboBox<>(horarios);
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 1;
         panel.add(labelHorario, gbc);
@@ -56,40 +54,31 @@ public class AgendamentoGUI {
         gbc.fill = GridBagConstraints.NONE;
         panel.add(botaoAgendar, gbc);
 
-        botaoAgendar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                java.util.Date dataSelecionada = dateChooser.getDate();
+        botaoAgendar.addActionListener((ActionEvent e) -> {
+            java.util.Date dataSelecionada = dateChooser.getDate();
 
-                if (dataSelecionada != null) {
-                    Date dataSql = new Date(dataSelecionada.getTime());
+            if (dataSelecionada != null) {
+                Date dataSql = new Date(dataSelecionada.getTime());
+                String horarioSelecionado = (String) comboBoxHorarios.getSelectedItem();
+                Time horarioSql = Time.valueOf(horarioSelecionado + ":00");
 
-
-                    String horarioSelecionado = (String) comboBoxHorarios.getSelectedItem();
-                    Time horarioSql = Time.valueOf(horarioSelecionado + ":00");
-
-                    Agendamento novoAgendamento = new Agendamento(dataSql, horarioSql);
-                    try {
-                        AgendamentoRepository.salvarAgendamento(novoAgendamento);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
+                Agendamento novoAgendamento = new Agendamento(dataSql, horarioSql);
+                try {
+                    AgendamentoRepository.salvarAgendamento(novoAgendamento);
                     agendamentos.add(novoAgendamento);
 
-                    // Exibe a mensagem
                     JOptionPane.showMessageDialog(frame, "Agendamento realizado com sucesso:\n" +
                             "Serviço: " + servicoEscolhido + "\nData: " + dataSql + "\nHorário: " + horarioSql);
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Data não selecionada. Por favor, escolha uma data.");
+                    frame.dispose();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    JOptionPane.showMessageDialog(frame, "Erro ao salvar o agendamento: " + ex.getMessage(),
+                            "Erro", JOptionPane.ERROR_MESSAGE);
                 }
-
-                frame.dispose();
+            } else {
+                JOptionPane.showMessageDialog(frame, "Data não selecionada. Por favor, escolha uma data.",
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
             }
         });
-
 
         botaoAgendar.setBackground(Color.decode("#025091"));
         botaoAgendar.setForeground(Color.WHITE);

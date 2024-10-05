@@ -11,7 +11,9 @@ import java.util.List;
 public class AnimalRepository {
 
     public void adicionarAnimal(Animal animal) throws SQLException {
+
         String sql = "INSERT INTO animais (NOME, RACA, IDADE, TIPO) VALUES (?, ?, ?, ?)";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setString(1, animal.getNome());
             stmt.setString(2, animal.getRaca());
@@ -24,8 +26,10 @@ public class AnimalRepository {
     }
 
     public List<Animal> buscarAnimais() throws SQLException {
+
         String sql = "SELECT * FROM animais";
         List<Animal> animais = new ArrayList<>();
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
@@ -46,7 +50,9 @@ public class AnimalRepository {
 
 
     public void atualizarAnimal(Animal animal) throws SQLException {
+
         String sql = "UPDATE animais SET NOME = ?, RACA = ?, IDADE = ?, TIPO = ? WHERE ID = ?";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setString(1, animal.getNome());
             stmt.setString(2, animal.getRaca());
@@ -60,7 +66,9 @@ public class AnimalRepository {
     }
 
     public void removerAnimal(Animal animal) throws SQLException {
+
         String sql = "DELETE FROM animais WHERE NOME = ? AND RACA = ? AND TIPO = ? AND IDADE = ?";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setString(1, animal.getNome());
             stmt.setString(2, animal.getRaca());

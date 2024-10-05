@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 
 public class Main {
+
     public static void main(String[] args) {
+
         JFrame frame = new JFrame("Pet Shop");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);

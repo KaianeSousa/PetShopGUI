@@ -5,13 +5,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LoginAdministradorGUI {
 
+    private JFrame frame;
+    private JLabel labelEmail;
+    private JTextField textEmail;
+    private JLabel labelSenha;
+    private JPasswordField textSenha;
+    private JButton botaoEntrar;
+
+
     public void mostrarTelaLoginAdministrador() {
-        JFrame frame = new JFrame("Entrar Como Administrador");
+
+        frame = new JFrame("Entrar Como Administrador");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setLayout(new GridBagLayout());
@@ -20,25 +30,25 @@ public class LoginAdministradorGUI {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel labelEmail = new JLabel("E-mail:");
-        JTextField textEmail = new JTextField(20);
+        labelEmail = new JLabel("E-mail:");
+        textEmail = new JTextField(20);
         labelEmail.setForeground(Color.decode("#CD6C0A"));
         gbc.gridx = 0; gbc.gridy = 0;
         frame.add(labelEmail, gbc);
         gbc.gridx = 1; gbc.gridy = 0;
         frame.add(textEmail, gbc);
 
-        JLabel labelSenha = new JLabel("Senha:");
-        JPasswordField textSenha = new JPasswordField(20);
+        labelSenha = new JLabel("Senha:");
+        textSenha = new JPasswordField(20);
         labelSenha.setForeground(Color.decode("#CD6C0A"));
         gbc.gridx = 0; gbc.gridy = 1;
         frame.add(labelSenha, gbc);
         gbc.gridx = 1; gbc.gridy = 1;
         frame.add(textSenha, gbc);
 
-
-        JButton botaoEntrar = new JButton("Entrar");
+        botaoEntrar = new JButton("Entrar");
         botaoEntrar.setPreferredSize(new Dimension(100, 30));
+        botaoEntrar.setMnemonic(KeyEvent.VK_E);
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
@@ -51,6 +61,13 @@ public class LoginAdministradorGUI {
             public void actionPerformed(ActionEvent e) {
                 String email = textEmail.getText();
                 String senha = new String(textSenha.getPassword());
+
+                // Validação dos campos obrigatórios
+                if (email.isEmpty() || senha.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Por favor, preencha todos os campos.",
+                            "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
                 try (Connection connection = ConectarBancoDeDados.getConnection()) {
                     AdministradorRepository repo = new AdministradorRepository(connection);

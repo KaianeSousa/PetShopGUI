@@ -16,7 +16,9 @@ public class ClienteRepository {
     public ClienteRepository() {}
 
     public void adicionarCliente(Cliente cliente) throws SQLException {
+
         String sql = "INSERT INTO clientes (NOME, TELEFONE, EMAIL, ENDERECO, SENHA) VALUES (?, ?, ?, ?, ?)";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getTelefone());
@@ -30,10 +32,13 @@ public class ClienteRepository {
     }
 
     public List<Cliente> buscarClientes() throws SQLException {
+
         String sql = "SELECT * FROM clientes";
         List<Cliente> clientes = new ArrayList<>();
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
                 Cliente cliente = new Cliente(
                         rs.getInt("ID"),
@@ -52,7 +57,9 @@ public class ClienteRepository {
     }
 
     public void atualizarCliente(Cliente cliente) throws SQLException {
+
         String sql = "UPDATE clientes SET NOME = ?, TELEFONE = ?, EMAIL = ?, ENDERECO = ?, SENHA = ? WHERE ID = ?";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getTelefone());
@@ -67,7 +74,9 @@ public class ClienteRepository {
     }
 
     public void removerCliente(Cliente cliente) throws SQLException {
+
         String sql = "DELETE FROM clientes WHERE ID = ?";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setInt(1, cliente.getId());
             stmt.executeUpdate();
@@ -77,7 +86,9 @@ public class ClienteRepository {
     }
 
     public boolean verificarCredenciais(String email, String senha) throws SQLException {
+
         String sql = "SELECT COUNT(*) FROM clientes WHERE EMAIL = ? AND SENHA = ?";
+
         try (PreparedStatement stmt = ConectarBancoDeDados.getConnection().prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, senha);

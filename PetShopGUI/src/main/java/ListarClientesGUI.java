@@ -13,8 +13,12 @@ public class ListarClientesGUI {
     private ClienteRepository clienteRepository = new ClienteRepository();
     private List<Cliente> clientes;
     private JFrame frame;
+    private JPanel painelBotoes;
+    private JButton botaoExcluir;
+    private JButton botaoEditar;
 
     public void mostrarTelaListarClientes() {
+        
         frame = new JFrame();
         frame.setTitle("Listar Clientes");
         frame.setSize(800, 600);
@@ -40,9 +44,9 @@ public class ListarClientesGUI {
         frame.repaint();
 
         if (clientes != null && !clientes.isEmpty()) {
-            JPanel panelBotoes = new JPanel();
-            JButton botaoExcluir = new JButton("Excluir");
-            JButton botaoEditar = new JButton("Editar");
+            painelBotoes = new JPanel();
+            botaoExcluir = new JButton("Excluir");
+            botaoEditar = new JButton("Editar");
 
             JComboBox<String> clienteComboBox = new JComboBox<>();
             for (int i = 0; i < clientes.size(); i++) {
@@ -92,14 +96,14 @@ public class ListarClientesGUI {
                 }
             });
 
-            panelBotoes.add(clienteComboBox);
-            panelBotoes.add(botaoExcluir);
-            panelBotoes.add(botaoEditar);
+            painelBotoes.add(clienteComboBox);
+            painelBotoes.add(botaoExcluir);
+            painelBotoes.add(botaoEditar);
 
             frame.getContentPane().setBackground(Color.decode("#F0F8FF"));
 
             frame.setLayout(new BorderLayout());
-            frame.add(panelBotoes, BorderLayout.NORTH);
+            frame.add(painelBotoes, BorderLayout.NORTH);
             frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
         } else {
             JOptionPane.showMessageDialog(frame, "Nenhum cliente cadastrado ainda.", "Clientes", JOptionPane.INFORMATION_MESSAGE);

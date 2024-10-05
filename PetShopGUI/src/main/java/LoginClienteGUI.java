@@ -1,13 +1,22 @@
+import repository.ConectarBancoDeDados;
+import repository.ClienteRepository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
-import repository.ConectarBancoDeDados;
-import repository.ClienteRepository;
 
 public class LoginClienteGUI {
+
+    private JFrame frame;
+    private JLabel labelEmail;
+    private JTextField textEmail;
+    private JLabel labelSenha;
+    private JPasswordField textSenha;
+    private JButton botaoEntrar;
 
     public void mostrarTelaLogin() {
         JFrame frame = new JFrame("Entrar Como Cliente");
@@ -19,24 +28,25 @@ public class LoginClienteGUI {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel labelEmail = new JLabel("E-mail:");
-        JTextField textEmail = new JTextField(20);
+        labelEmail = new JLabel("E-mail:");
+        textEmail = new JTextField(20);
         gbc.gridx = 0; gbc.gridy = 0;
         frame.add(labelEmail, gbc);
         gbc.gridx = 1; gbc.gridy = 0;
         frame.add(textEmail, gbc);
         labelEmail.setForeground(Color.decode("#025091"));
 
-        JLabel labelSenha = new JLabel("Senha:");
-        JPasswordField textSenha = new JPasswordField(20);
+        labelSenha = new JLabel("Senha:");
+        textSenha = new JPasswordField(20);
         gbc.gridx = 0; gbc.gridy = 1;
         frame.add(labelSenha, gbc);
         gbc.gridx = 1; gbc.gridy = 1;
         frame.add(textSenha, gbc);
         labelSenha.setForeground(Color.decode("#025091"));
 
-        JButton botaoEntrar = new JButton("Entrar");
+        botaoEntrar = new JButton("Entrar");
         botaoEntrar.setPreferredSize(new Dimension(100, 30));
+        botaoEntrar.setMnemonic(KeyEvent.VK_E);
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;

@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AgendamentoRepository {
+
     public static void salvarAgendamento(Agendamento agendamento) throws SQLException, ClassNotFoundException {
+
         String sql = "INSERT INTO agendamentos (data, horario) VALUES (?, ?)";
 
         Connection connection = ConectarBancoDeDados.getConnection();

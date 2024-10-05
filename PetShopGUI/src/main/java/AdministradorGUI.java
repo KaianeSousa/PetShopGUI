@@ -5,21 +5,26 @@ import java.awt.event.ActionListener;
 
 public class AdministradorGUI {
 
+   private JFrame frame;
+   private JPanel painelBotoes;
+   private JButton botaoListarClientes;
+   private JButton botaoListarAnimais;
+
     public void mostrarTelaAdministrador() {
-        JFrame frame = new JFrame("Pet Shop");
+        frame = new JFrame("Pet Shop");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(700, 500);
 
-        JPanel panelBotoes = new JPanel();
-        panelBotoes.setLayout(new GridBagLayout());
+        painelBotoes = new JPanel();
+        painelBotoes.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.NONE;
 
-        JButton botaoListarClientes = new JButton("Ver Clientes Cadastrados");
-        JButton botaoListarAnimais = new JButton("Ver Animais Cadastrados");
+        botaoListarClientes = new JButton("Ver Clientes Cadastrados");
+        botaoListarAnimais = new JButton("Ver Animais Cadastrados");
 
         Dimension tamanhoBotao = new Dimension(200, 30);
         botaoListarClientes.setPreferredSize(tamanhoBotao);
@@ -48,12 +53,12 @@ public class AdministradorGUI {
         botaoListarAnimais.setForeground(Color.decode("#FFFFFF"));
 
         gbc.gridx = 0; gbc.gridy = 0;
-        panelBotoes.add(botaoListarClientes, gbc);
+        painelBotoes.add(botaoListarClientes, gbc);
 
         gbc.gridx = 0; gbc.gridy = 1;
-        panelBotoes.add(botaoListarAnimais, gbc);
+        painelBotoes.add(botaoListarAnimais, gbc);
 
-        frame.add(panelBotoes);
+        frame.add(painelBotoes);
         frame.setVisible(true);
         frame.getContentPane().setBackground(Color.decode("#FFFACD"));
     }
