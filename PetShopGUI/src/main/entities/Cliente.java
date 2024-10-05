@@ -1,18 +1,35 @@
+package entities;
+
 public class Cliente {
+
+    private int id; // É gerado automaticamente pelo banco
     private String nome;
     private String telefone;
     private String email;
     private String endereco;
+    private String senha;
 
-    // Construtor
-    public Cliente(String nome, String telefone, String email, String endereco) {
+    public Cliente(int id, String nome, String telefone, String email, String endereco, String senha) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
+        this.senha = senha;
     }
 
-    // Métodos para obter as informações do cliente
+    public Cliente(String nome, String telefone, String email, String endereco, String senha) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.senha = senha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -29,11 +46,31 @@ public class Cliente {
         return endereco;
     }
 
-    // Método para exibir as informações do cliente
-    public String detalhesCliente() {
-        return "Nome: " + nome + "\n" +
-                "Telefone: " + telefone + "\n" +
-                "E-mail: " + email + "\n" +
-                "Endereço: " + endereco;
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

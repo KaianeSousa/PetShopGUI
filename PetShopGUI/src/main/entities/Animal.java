@@ -1,25 +1,64 @@
-public class Animal {
-    private String nome;
-    private int raca;
-    private int idade;
-    private Cliente dono;
+package entities;
 
-    public Animal(String nome, int idade, Cliente dono) {
+public class Animal {
+    private int id;
+    private String nome;
+    private String raca;
+    private String tipo;
+    private String idade;
+
+    public Animal(int id, String nome, String raca, String tipo, String idade) {
+        this.id = id;
         this.nome = nome;
         this.raca = raca;
+        this.tipo = tipo;
         this.idade = idade;
-        this.dono = dono;
+    }
+
+    public Animal(String nome, String idade, String tipo, String raca) {
+        this.nome = nome;
+        this.raca = raca;
+        this.tipo = tipo;
+        this.idade = idade;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public int getIdade() {
+    public String getRaca() {
+        return raca;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getIdade() {
         return idade;
     }
 
-    public Cliente getDono() {
-        return dono;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setIdade(String idade) {
+        this.idade = idade;
     }
 }
